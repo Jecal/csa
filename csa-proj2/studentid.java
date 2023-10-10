@@ -4,7 +4,7 @@ public class studentid {
     private boolean isMale;
     private int grade;
     private int ID;
-    private String binaryID;
+    private String idString;
 
     public studentid() {
         System.out.println("Enter student id.");
@@ -12,23 +12,13 @@ public class studentid {
 
     public studentid(int id) {
         ID = id;
-        binaryID = Integer.toBinaryString(id);
-        // // making sure the binaryID string is 13 bits
-        // int leadZeros = 13 - binaryID.length();
-        // if (leadZeros > 0) {
-        //     // add more zeros
-        //     StringBuilder fBinaryID = new StringBuilder();
-        //     for (int i = 0; i < leadZeros; i++) {
-        //         fBinaryID.append('0');
-        //     }
-        // } else if (leadZeros == 0) {
-        //     // when string is already 13 bits long
-        //     System.out.println(binaryID);
-        // } else {
-        //     // when string is longer than 13 bits
-        //     System.out.println(binaryID.substring(binaryID.length() - 13));
-        // }
-        // // System.out.println(binaryID);
+        idString = Integer.toBinaryString(id);
+        int len = idString.length();
+        int leadz = 13 - len;
+        for (int i = 0; i < leadz; i++) {
+            idString = "0" + idString;
+        }
+        // System.out.println(idString);
     }
 
     public int getID() {
@@ -36,7 +26,7 @@ public class studentid {
     }
 
     public int getGrade() {
-        String grade = binaryID.substring(0,2);
+        String grade = idString.substring(0,2);
         switch(grade) {
             case "00":
                 // System.out.println("Freshman");
@@ -56,7 +46,7 @@ public class studentid {
     }
 
     public char getFirstN() {
-        String stringFirstN = binaryID.substring(2,7);
+        String stringFirstN = idString.substring(2,7);
         int binaryIntFirstN = Integer.parseInt(stringFirstN, 2);
         firstN = (char) ('A' + (binaryIntFirstN - 1));
         // System.out.println(firstN);
@@ -64,7 +54,7 @@ public class studentid {
     }
 
     public char getLastN() {
-        String stringLastN = binaryID.substring(7,12);
+        String stringLastN = idString.substring(7,12);
         int binaryIntLastN = Integer.parseInt(stringLastN, 2);
         lastN = (char) ('A' + (binaryIntLastN - 1));
         // System.out.println(lastN);
@@ -72,7 +62,7 @@ public class studentid {
     }
 
     public boolean getIsMale() {
-        String isMale = binaryID.substring(12,13);
+        String isMale = idString.substring(12,13);
         switch(isMale) {
             case "0":
                 // System.out.println("Male");
@@ -91,8 +81,7 @@ public class studentid {
         char lastN = getLastN();
         boolean isMale = getIsMale();
         String gender;
-        System.out.println(isMale);
-        if (isMale = true) {
+        if (ID % 2 == 0) {
             gender = "Male";
         } else {
             gender = "Female";
