@@ -41,7 +41,7 @@ public class studentid {
         }
         // convert bool to binary string
         String isMalebString;
-        if (isM = true) {
+        if (isM == true) {
             isMalebString = "0";
         } else {
             isMalebString = "1";
