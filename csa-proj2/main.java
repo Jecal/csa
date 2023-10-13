@@ -8,6 +8,7 @@ public class main {
 		// System.out.println("ID generated: " + rand_int);
 
 		studentid stud = new studentid('W', 'N', true, 3);
+		// studentid stud2 = new studentid(7644);
 		System.out.println(stud.getID());
 		System.out.println(stud.getGrade());
 		System.out.println(stud.getFirstN());
