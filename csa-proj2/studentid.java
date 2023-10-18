@@ -18,7 +18,6 @@ public class studentid {
         for (int i = 0; i < leadz; i++) {
             idString = "0" + idString;
         }
-        // System.out.println(idString);
     }
 
     public studentid(char fN, char lN, boolean isM, int gL) {
