@@ -1,10 +1,11 @@
-public class studentid {
+public class studentid implements Comparable<studentid> {
     private char firstN;
     private char lastN;
     private boolean isMale;
     private int grade;
     private int ID;
     private String idString;
+    private String gradeString;
 
     public studentid() {
         System.out.println("Enter student id.");
@@ -18,9 +19,19 @@ public class studentid {
         for (int i = 0; i < leadz; i++) {
             idString = "0" + idString;
         }
+        // System.out.println(idString);
     }
 
     public studentid(char fN, char lN, boolean isM, int gL) {
+        // convert bool to binary string
+        String isMalebString;
+        if (isM == true) {
+            // System.out.println(isM);
+            isMalebString = "0";
+        } else {
+            // System.out.println(isM);
+            isMalebString = "1";
+        }
         // convert first n char to binary string
         int fNint = (int) fN;
         String fNbString = Integer.toBinaryString(fNint - 64);
@@ -37,13 +48,6 @@ public class studentid {
         int lNbStringLeadz = 5 - lNbStringLen;
         for (int i = 0; i < lNbStringLeadz; i++) {
             lNbString = "0" + lNbString;
-        }
-        // convert bool to binary string
-        String isMalebString;
-        if (isM == true) {
-            isMalebString = "0";
-        } else {
-            isMalebString = "1";
         }
         // convert int to bstring
         String gLbString;
@@ -65,7 +69,7 @@ public class studentid {
         }
         idString = (gLbString + fNbString + lNbString + isMalebString);
         ID = Integer.parseInt(idString, 2);
-        System.out.println(ID);
+        // System.out.println(ID);
     }
 
     public int getID() {
@@ -73,8 +77,8 @@ public class studentid {
     }
 
     public int getGrade() {
-        String grade = idString.substring(0, 2);
-        switch (grade) {
+        gradeString = gradeString = idString.substring(0, 2);
+        switch (gradeString) {
             case "00":
                 // System.out.println("Freshman");
                 return 9;
@@ -150,6 +154,10 @@ public class studentid {
             default:
                 gradeName = "Error";
         }
-        System.out.println(gradeName + ", " + firstN + ", " + lastN + ", " + gender);
+        System.out.println(gradeName + ", " + firstN + ", " + lastN + ", " + gender + ", " + ID);
+    }
+
+    public int compareTo(studentid other) {
+        return Integer.compare(this.ID, other.ID);
     }
 }
