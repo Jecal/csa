@@ -7,7 +7,7 @@ public class Songs implements Comparable<Songs> {
     public Songs(String title, String artist, String time) {
         songTitle = title;
         songArtist = artist;
-        songTime = time;
+        songTime = time; 
     }
 
     @Override
@@ -23,30 +23,24 @@ public class Songs implements Comparable<Songs> {
         return songArtist;
     }
 
-    public String getTime() {
-        return songTime;
+    public int getTime() {
+        return this.calcRuntime(songTime);
     }
-
+    
     public String formatTime() {
         this.calcRuntime(songTime);
         int time = runtime;
-        int h;
-        int m;
-        int s;
-        h = time / 3600;
-        m = (time % 3600) / 60;
-        s = (time % 60);
-        if (h == 0) {
-            return m + " minutes " + s + " seconds";
-        } else if (h == 0 && m == 0) {
+        int h; int m; int s;
+        h = time/3600;
+        m = (time%3600) / 60;
+        s = (time%60);
+        if (h == 0 && m == 0) {
             return s + " seconds";
+        } else if (h == 0) {
+            return  m + " minutes " + s + " seconds";
         } else {
             return "" + h + " hours " + m + " minutes " + s + " seconds";
         }
-    }
-
-    public int getRuntime() {
-        return this.calcRuntime(songTime);
     }
 
     private int calcRuntime(String time) {
