@@ -7,18 +7,16 @@ public class Playlist {
     
     public void addTrack(Songs song) {
         Tracklist.add(song);
+        runtime += song.getTime();
     }
 
     public void addTrack(String title, String artist, String time) {
         Songs newSong = new Songs(title, artist, time);
         Tracklist.add(newSong);
+        runtime += newSong.getTime();
     }
     
     public int getRuntime() {
-        runtime = 0;
-        for (int i = 0; i < Tracklist.size(); i++) {
-            runtime += Tracklist.get(i).getRuntime();
-        }
         return runtime;
     }
     
@@ -28,10 +26,10 @@ public class Playlist {
         h = time/3600;
         m = (time%3600) / 60;
         s = (time%60);
-        if (h == 0) {
-            return m + " minutes " + s + " seconds";
-        } else if (h == 0 && m == 0) {
+        if (h == 0 && m == 0) {
             return s + " seconds";
+        } else if (h == 0) {
+            return  m + " minutes " + s + " seconds";
         } else {
             return "" + h + " hours " + m + " minutes " + s + " seconds";
         }
@@ -46,4 +44,11 @@ public class Playlist {
     public void sort(){
         Collections.sort(Tracklist);
     }
+    
+    // overload implement, sort by type
+    /* 
+    public void sort(String type){
+        Collections.sort(Tracklist, Songs(type));
+    } 
+    */
 }
