@@ -3,7 +3,8 @@ import java.util.*;
 
 public class Playlist {
     private ArrayList<Songs> Tracklist = new ArrayList<Songs>();
-
+    private int runtime = 0;
+    
     public void addTrack(Songs song) {
         Tracklist.add(song);
     }
@@ -12,23 +13,21 @@ public class Playlist {
         Songs newSong = new Songs(title, artist, time);
         Tracklist.add(newSong);
     }
-
+    
     public int getRuntime() {
-        int tracklistRuntime = 0;
+        runtime = 0;
         for (int i = 0; i < Tracklist.size(); i++) {
-            tracklistRuntime += Tracklist.get(i).getRuntime();
+            runtime += Tracklist.get(i).getRuntime();
         }
-        return tracklistRuntime;
+        return runtime;
     }
-
-    public String formatTime() {
-        int time = getRuntime();
-        int h;
-        int m;
-        int s;
-        h = time / 3600;
-        m = (time % 3600) / 60;
-        s = (time % 60);
+    
+    public static String formatTime(int i) {
+        int time = i;
+        int h; int m; int s;
+        h = time/3600;
+        m = (time%3600) / 60;
+        s = (time%60);
         if (h == 0) {
             return m + " minutes " + s + " seconds";
         } else if (h == 0 && m == 0) {
@@ -37,19 +36,14 @@ public class Playlist {
             return "" + h + " hours " + m + " minutes " + s + " seconds";
         }
     }
-
+    
     public void print() {
         for (int i = 0; i < Tracklist.size(); i++) {
-            System.out.println("" + (i + 1) + ". " + Tracklist.get(i).getTitle() + ", " + Tracklist.get(i).getArtist()
-                    + " - " + Tracklist.get(i).formatTime());
+            System.out.println("" + (i+1) + ". " + Tracklist.get(i).getTitle() + ", " + Tracklist.get(i).getArtist() + " - " + Tracklist.get(i).formatTime());
         }
     }
-
-    public void sort() {
+    
+    public void sort(){
         Collections.sort(Tracklist);
     }
-
-    // public void sort(String pref){
-    // Collections.sort(Tracklist);
-    // }
 }
